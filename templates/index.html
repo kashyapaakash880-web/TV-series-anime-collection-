@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}My Top Anime and Shows {% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="heading">My Top TV shows </h1>
+  <p class="description">These are my all-time favourite TV Shows and anime .</p>
+
+    <div class="search-container">
+        <form action="{{ url_for('search') }}" method="GET" class="search-form">
+            <input
+                type="text"
+                name="query"
+                placeholder="🔍 Search your collection..."
+                class="search-input"
+            >
+            <button type="submit" class="search-btn">
+                Search
+            </button>
+        </form>
+    </div>
+
+  <div class="stats">
+    <h3>📊 Dashboard</h3>
+
+    <div class="stat-item">
+        <span>📺 Total Shows</span>
+        <strong>{{ total_shows }}</strong>
+    </div>
+
+    <div class="stat-item">
+        <span>🎌 Anime</span>
+        <strong>{{ anime }}</strong>
+    </div>
+
+    <div class="stat-item">
+        <span>📺 TV Shows</span>
+        <strong>{{ shows }}</strong>
+    </div>
+
+    <div class="stat-item">
+        <span>⭐ Average Rating</span>
+        <strong>{{ average }}/10</strong>
+    </div>
+
+    <div class="stat-item">
+        <span>🔥 Favourite Genre</span>
+        <strong>{{ favorite_genre }}</strong>
+    </div>
+</div>
+    {% for series in series %}
+<div class="card">
+
+    <div class="poster">
+        <img src="{{ series.img_url }}" alt="{{ series.title }}">
+        <p class="large">{{ series.ranking }}</p>
+    </div>
+
+    <div class="card-content">
+
+        <div class="title">
+            Title : {{ series.title }}<br>
+            <span class="release_date">
+                Year : ({{ series.year }})
+            </span>
+        </div>
+
+        <div class="rating">
+            <label>Rating : ({{ series.rating }}/10)</label>
+            <i class="fas fa-star star"></i>
+        </div>
+
+        <p class="review">
+            Review : {{ series.review }}
+        </p>
+
+        <p class="genre">
+            Genre : {{ series.genre }}
+        </p>
+
+        <p class="tagline">
+            Tagline : {{ series.tagline }}
+        </p>
+
+        <p class="overview">
+            Overview : {{ series.description }}
+        </p>
+
+        <div class="card-buttons">
+            <a href="{{ url_for('edit', id=series.id) }}"
+               class="button">
+                Update
+            </a>
+
+            <a href="{{ url_for('delete', id=series.id) }}"
+               class="button delete-button">
+                Delete
+            </a>
+        </div>
+
+    </div>
+
+</div>
+{% endfor %}
+</div>
+<div class="container text-center add">
+<a href="{{ url_for('add') }}" class="button">Add Shows or Anime </a>
+</div>
+
+
+
+{% endblock %}

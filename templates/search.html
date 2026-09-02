@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search bar </title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+</head>
+<body>
+    {% for show in results %}
+
+    <div class="result-card">
+
+        <img src="{{ show.img_url }}" alt="{{ show.title }}" class="poster">
+
+        <div class="result-info">
+
+            <h1>{{ show.id }}</h1>
+
+            <h2>{{ show.title }}</h2>
+
+            <p>📅 {{ show.year }}</p>
+
+            <p><strong>Genre :</strong> {{ show.genre }}</p>
+
+            <p>{{ show.description }}</p>
+
+            <p><strong>Rating :</strong> {{ show.rating }}</p>
+
+            <a href="{{ url_for('home') }}" class="view-btn">
+                Back Home
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+</body>
+</html>
